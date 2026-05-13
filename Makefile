@@ -1,7 +1,7 @@
 TARGET = orderBook
 
-CXX = clang++
-CXXFLAGS = -Wall -Wextra -std=c++20
+CC = gcc
+CFLAGS = -Wall -Wextra -fanalyzer
 
 INC = -I include
 
@@ -11,11 +11,11 @@ OBJ = $(SRC:.cpp=.o)
 
 all: $(TARGET)
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(INC) -c $< -o $@
+%.o: %.c
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(OBJ) -o $(TARGET) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET) $(LIBS)
 
 clean:
 	@ $(RM) $(OBJ)
