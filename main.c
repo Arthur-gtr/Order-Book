@@ -12,36 +12,32 @@ typedef struct Order
 
 typedef struct OrderBook
 {
-    Order trade_min;
-    Order trade_max;
-
     size_t order_book_size;
-    Order *asks;
-    Order *bids;
+    Order *asks_queu;
+    Order *bids_queu;
 } OrderBook;
 
 void init_oder_book(OrderBook *order_book)
 {
-    order_book->trade_min = (Order) {0, 0};
-    order_book->trade_max = (Order) {0, 0};
-
     order_book->order_book_size = 0;
-    order_book->asks = NULL;
-    order_book->bids = NULL;
+    order_book->asks_queu = NULL;
+    order_book->bids_queu = NULL;
 }
 
 void destroy_order_book(OrderBook *order_book)
 {
-    free(order_book->asks);
-    free(order_book->bids);
+    free(order_book->asks_queu);
+    free(order_book->bids_queu);
 }
+
+
 
 int main(void)
 {
     LOG_INFO("Start the order book");
     OrderBook order_book;
-    
     init_oder_book(&order_book);
+    
 
     LOG_DEBUG("Destroy Order Book");
     destroy_order_book(&order_book);
